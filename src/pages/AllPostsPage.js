@@ -1,8 +1,7 @@
 import {React, useEffect, useState} from 'react';
-import {Link} from "react-router-dom";
 
 import {postService} from '../servises/post.service';
-import {Outlet} from "react-router-dom";
+import AllPostsDetails from "../components/all_posts_details/AllPostsDetails";
 
 function AllPostsPage() {
     const [posts, setPosts] = useState([])
@@ -16,24 +15,10 @@ function AllPostsPage() {
     return (
         posts.map(post => {
             return (
-                <div key={post.id}>
-                    <div className={'d-flex'}>
-                        <Link
-                            to={`${post.id}`}
-                            state={{post}}
-                            className={'col-4 border'}
-                        >
-                            {post.id} - {post.title}
-                        </Link>
-                        <div className={'col-8 border'}>
-                            <Outlet/>
-                        </div>
-                    </div>
-                </div>
+                <AllPostsDetails post={post}/>
             )
         })
-
-    );
+    )
 }
 
 export default AllPostsPage;
