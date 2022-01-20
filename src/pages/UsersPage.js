@@ -20,6 +20,7 @@ function UsersPage() {
                     <div className={'d-flex'}>
                         <Link
                             to={`${user.id}`}
+                            state={{user}}
                             className={'col-4 border'}
                         >
                             {user.name}
@@ -31,8 +32,7 @@ function UsersPage() {
                 </div>
             )
         })
-
-    );
+    )
 }
 
 export default UsersPage;

@@ -1,21 +1,21 @@
 import {React, useState, useEffect} from 'react';
-import {Outlet, useParams, Link} from "react-router-dom";
+import {Outlet, useParams, Link, useLocation} from "react-router-dom";
 
 import {postService} from "../servises/post.service";
 
 function PostPage() {
     const {id} = useParams()
-    const [showComments, setShowComments] = useState(true)
+    const location = useLocation()
     const [post, setPost] = useState([])
-    const [comments, setComments] = useState([])
 
     useEffect(() => {
-        postService.getPostComments(id).then(comments => {
-            setComments(comments)
-        })
-        postService.getPostById(id).then(post => {
-            setPost(post)
-        })
+        if (location.state.post) {
+            setPost(location.state.post)
+        } else {
+            postService.getPostbyId(id).then(post => {
+                setPost(post)
+            })
+        }
     }, [])
 
 
@@ -29,10 +29,10 @@ function PostPage() {
                 <div>{post.body}</div>
             </div>
 
-            <Link to={`comments`} className={'btn btn-button'} onClick={() => setShowComments(false)}>
+            <Link to={`comments`} className={'btn btn-button'}>
                 Show Comments
             </Link>
-            <Link to={``} className={'btn btn-button'} onClick={() => setShowComments(true)}>
+            <Link to={``} className={'btn btn-button'}>
                 Close Comments
             </Link>
 

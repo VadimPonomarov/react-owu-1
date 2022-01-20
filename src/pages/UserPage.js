@@ -1,22 +1,22 @@
 import {React, useState, useEffect} from 'react';
-import {Outlet, useParams, Link} from "react-router-dom";
+import {Outlet, useParams, Link, useLocation} from "react-router-dom";
 
 import {userService} from "../servises/user.service";
 
 function UserPage() {
     const {id} = useParams()
-    const [showPosts, setShowPosts] = useState(true)
+    const location = useLocation()
     const [user, setUser] = useState([])
-    const [posts, setPosts] = useState([])
 
     useEffect(() => {
-        userService.getUserPosts(id).then(posts => {
-            setPosts(posts)
-        })
-        userService.getUserbyId(id).then(user => {
-            setUser(user)
-        })
-    }, [id])
+        if (location.state.user) {
+            setUser(location.state.user)
+        } else {
+            userService.getUserbyId(id).then(user => {
+                setUser(user)
+            })
+        }
+    }, [])
 
 
     return (
@@ -33,10 +33,10 @@ function UserPage() {
                 <div>{JSON.stringify(user.company)}</div>
             </div>
 
-            <Link to={`/${id}/posts`} className={'btn btn-button'} onClick={() => setShowPosts(false)}>
+            <Link to={`/${id}/posts`} className={'btn btn-button'}>
                 Show Posts
             </Link>
-            <Link to={`/${id}`} className={'btn btn-button'} onClick={() => setShowPosts(true)}>
+            <Link to={`/${id}`} className={'btn btn-button'}>
                 Close Posts
             </Link>
 

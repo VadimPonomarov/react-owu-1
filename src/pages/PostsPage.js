@@ -11,7 +11,7 @@ function PostsPage() {
         userService.getUserPosts(id).then(posts => {
             setPosts(posts)
         })
-    })
+    }, [])
 
     return (
         posts.map(post => {

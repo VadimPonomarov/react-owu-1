@@ -20,6 +20,7 @@ function AllPostsPage() {
                     <div className={'d-flex'}>
                         <Link
                             to={`${post.id}`}
+                            state={{post}}
                             className={'col-4 border'}
                         >
                             {post.id} - {post.title}
