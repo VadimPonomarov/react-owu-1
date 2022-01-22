@@ -11,7 +11,7 @@ function CommentsPage() {
         postService.getPostComments(id).then(comments => {
             setComments(comments)
         })
-    })
+    }, [])
 
     return (
         comments.map(comment => {

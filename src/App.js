@@ -19,6 +19,9 @@ function App() {
                     <Route path={':id'} element={<UserPage/>}>
                         <Route path={'posts'} element={<PostsPage/>}/>
                     </Route>
+                    <Route path={'albums'} element={<UsersPage/>}>
+                        <Route path={':albId'} element={''}/>
+                    </Route>
                     <Route path={'posts'} element={<AllPostsPage/>}/>
                     <Route path={'posts/:id'} element={<PostPage/>}>
                         <Route path={'comments'} element={<CommentsPage/>}/>
