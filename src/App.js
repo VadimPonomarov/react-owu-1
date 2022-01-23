@@ -10,6 +10,7 @@ import AllPostsPage from "./pages/AllPostsPage";
 import PostPage from "./pages/PostPage";
 import CommentsPage from "./pages/CommentsPage";
 
+
 function App() {
     return (
         <div>
