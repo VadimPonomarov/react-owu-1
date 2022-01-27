@@ -1,36 +1,27 @@
-import React from "react";
-import {Route, Routes} from "react-router-dom";
+import {React, useReducer} from "react";
 
-import MainLayout from "./layouts/MainLayout";
-import UsersPage from "./pages/UsersPage";
-import UserPage from "./pages/UserPage";
-import PostsPage from "./pages/PostsPage";
-import Error404 from "./pages/Error404";
-import AllPostsPage from "./pages/AllPostsPage";
-import PostPage from "./pages/PostPage";
-import CommentsPage from "./pages/CommentsPage";
+import Counter from './components/counter/Counter'
+
+const INC = 'inc'
+const DEC = 'dec'
+const RES = 'res'
+
+const reducer = (state, action) => {
+    console.log(state)
+    switch (action.type) {
+        case 'inc':
+            return {...state, [action.payload.hhh]: {name: ',jhv'}}
+        case "dec":
+        case "res":
+    }
+}
 
 
 function App() {
+    const [state, dispatch] = useReducer(reducer, {})
+
     return (
-        <div>
-            <Routes>
-                <Route path={'/'} element={<MainLayout/>}>
-                    <Route path={''} element={<UsersPage/>}/>
-                    <Route path={':id'} element={<UserPage/>}>
-                        <Route path={'posts'} element={<PostsPage/>}/>
-                    </Route>
-                    <Route path={'albums'} element={<UsersPage/>}>
-                        <Route path={':albId'} element={''}/>
-                    </Route>
-                    <Route path={'posts'} element={<AllPostsPage/>}/>
-                    <Route path={'posts/:id'} element={<PostPage/>}>
-                        <Route path={'comments'} element={<CommentsPage/>}/>
-                    </Route>
-                </Route>
-                <Route path={'*'} element={<Error404/>}/>
-            </Routes>
-        </div>
+        <Counter number={3}/>
     )
 }
 
